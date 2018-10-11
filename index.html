@@ -19,7 +19,7 @@
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
 			<section class="main">
-				<input id="toggle-all" class="toggle-all" type="checkbox"  >
+				<input id="toggle-all" class="toggle-all" type="checkbox"  v-model="toggleAll" @click="toggleAllCheck">
 				<label for="toggle-all">Mark all as complete</label>
 				<ul class="todo-list">
 					<!-- These are here just to show the structure of the list items -->
@@ -32,12 +32,13 @@
 						</div>
 						<input class="edit" value="Create a TodoMVC template">
 					</li> -->
-					<li v-for="(item,i) in todos">
+					<li v-for="(item,i) in todos" v-bind:class="{completed:item.completed}" v-model="item.completed">
 						<div class="view">
-							<input class="toggle" type="checkbox" >
-							<label>{{item.desc}}+{{item.id}}</label>
+							<input class="toggle" type="checkbox" v-model="item.completed">
+							<label>{{item.desc}}</label>
 							<!-- 根据id删除数据 -->
-							<button class="destroy" @click="del(item.id)"></button>
+							<!-- 根据数组里的每一个对象删除数据 -->
+							<button class="destroy" @click="del(item)"></button>
 						</div>
 						<input class="edit" value="Rule the web">
 					</li>

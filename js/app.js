@@ -24,15 +24,19 @@ var vm = new Vue({
         //     alert("enter键抬起了")
         // } 
 
-        del(id){
+        del(item){
              //根据id删除数据
             //使用findindex()方法找到要删除的那一项的索引
-            var index = this.todos.findIndex(item=>{
-                if(item.id==id){
+            // var index = this.todos.findIndex(item=>{
+            //     if(item.id==id){
                     
-                    return true//返回true终止findIndex循环
-                }
-            })
+            //         return true//返回true终止findIndex循环
+            //     }
+            // })
+            // this.todos.splice(index,1)
+
+            var index = this.todos.indexOf(item)
+            //console.log(index);
             this.todos.splice(index,1)
         },
 
@@ -42,6 +46,15 @@ var vm = new Vue({
             //this.todos.length=0;
             this.todos=[]
             // alert("清空数组")
+        },
+
+        //点击按键 下面的选择框全部被选中
+        toggleAllCheck() {
+            console.log(this.toggleAll)//结果为true或false
+            //循环TODO数组 让todo中的每一项completed变为toggleAll
+            this.todos.forEach((item,index) => {
+                item.completed=this.toggleAll
+            });
         }
        
 
